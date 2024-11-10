@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Age Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        #timeDisplay {
+            font-size: 24px;
+            font-weight: bold;
+            background-color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="timeDisplay">Loading...</div>
+
+    <script>
+        function calculateTimePassed(birthDate) {
+            // Get current date and time
+            const currentDate = new Date();
+            
+            // Convert birthDate string to Date object
+            const birthDateObj = new Date(birthDate);
+
+            // Calculate the difference in milliseconds
+            const timeDiff = currentDate - birthDateObj;
+
+            // Calculate the time difference in various units
+            const years = Math.floor(timeDiff / (1000 * 60 * 60 * 24 * 365.25)); // Considering leap years
+            const months = Math.floor(timeDiff / (1000 * 60 * 60 * 24 * 30.436875)) % 12; // Approximation for months in a year
+            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24)) % 30; // Approximation for days in a month
+            const hours = Math.floor(timeDiff / (1000 * 60 * 60)) % 24;
+            const minutes = Math.floor(timeDiff / (1000 * 60)) % 60;
+            const seconds = Math.floor(timeDiff / 1000) % 60;
+
+            // Format the result as a readable string
+            const result = `${years} years, ${months} months, ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+
+            return result;
+        }
+
+        function updateTime() {
+            const birthDate = "1994-10-10"; // Replace with your actual birthdate
+            const timePassed = calculateTimePassed(birthDate);
+
+            // Display the updated time passed in the console or on the page
+            console.log(timePassed);
+            
+            // Update the text content of the HTML element
+            document.getElementById("timeDisplay").innerText = timePassed;
+        }
+
+        // Call the updateTime function every 1000ms (1 second)
+        setInterval(updateTime, 1000);
+    </script>
+
+</body>
+</html>

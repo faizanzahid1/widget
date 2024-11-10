@@ -5,22 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Live Age Calculator</title>
     <style>
+        /* Black theme with snow white text */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f0f0f0;
+            background-color: #000000; /* Black background */
+            color: #ffffff; /* Snow white text color */
+            font-size: 18px;
+            line-height: 1.6;
         }
+
         #timeDisplay {
-            font-size: 24px;
-            font-weight: bold;
-            background-color: #fff;
-            padding: 10px 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            font-size: 20px;
+            font-weight: Regular;
+            background-color: #222222; /* Dark grey background for the display box */
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1); /* Soft glow effect around the box */
+            border: 1px solid #444444; /* Slightly lighter border for contrast */
+            color: #ffffff; /* Snow white text */
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2); /* Subtle white glow around the text */
+        }
+
+        /* Optional: Adding a gradient effect for a little flair */
+        body {
+            background: linear-gradient(to bottom right, #000000, #1a1a1a); /* Gradient black to dark gray */
         }
     </style>
 </head>
@@ -29,6 +42,9 @@
     <div id="timeDisplay">Loading...</div>
 
     <script>
+        // Static red color for the digits
+        const RED_COLOR = "#ff6347"; // Pure red
+
         function calculateTimePassed(birthDate) {
             // Get current date and time
             const currentDate = new Date();
@@ -60,8 +76,23 @@
             // Display the updated time passed in the console or on the page
             console.log(timePassed);
             
-            // Update the text content of the HTML element
-            document.getElementById("timeDisplay").innerText = timePassed;
+            // Create the display string with digits in red and other characters in white
+            const timeDisplayElement = document.getElementById("timeDisplay");
+            timeDisplayElement.innerHTML = ''; // Clear previous content
+
+            // Loop through each character in the string and wrap digits in red color
+            for (let i = 0; i < timePassed.length; i++) {
+                const char = timePassed[i];
+
+                if (char.match(/[0-9]/)) { // If it's a digit
+                    const span = document.createElement("span");
+                    span.style.color = RED_COLOR; // Apply red color to digits
+                    span.innerText = char;
+                    timeDisplayElement.appendChild(span);
+                } else {
+                    timeDisplayElement.innerHTML += char; // Non-digit characters stay white
+                }
+            }
         }
 
         // Call the updateTime function every 1000ms (1 second)

@@ -41,22 +41,12 @@
             text-shadow: 0 0 10px rgba(0, 255, 255, 0.6), 0 0 20px rgba(0, 255, 255, 0.3);
         }
 
-        .digit {
-            font-size: 42px;
-            font-weight: bold;
-            text-shadow: 0 0 10px rgba(255, 59, 48, 0.7), 0 0 20px rgba(255, 59, 48, 0.4);
-        }
-
         .unit {
             font-size: 16px;
             font-weight: normal;
             color: #b2b2b2;
             text-transform: uppercase;
             letter-spacing: 1px;
-        }
-
-        .year {
-            color: #ff3b30;
         }
 
         .other {
@@ -147,9 +137,6 @@
                 `;
                 formatsElement.appendChild(formatItem);
             });
-
-            // Display only the year in red
-            timeDisplayElement.innerHTML = `<span class="digit year">${years}</span>`;
 
         }
 

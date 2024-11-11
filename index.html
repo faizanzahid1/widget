@@ -16,13 +16,13 @@
             background: #000;
             color: #e0e0e0;
             font-size: 16px;
-            line-height: 1.6;
+            line-height: 1.3;
             flex-direction: column;
         }
 
         #timeDisplayContainer {
             background-color: rgba(15, 15, 15, 0.8);
-            padding: 10px 20px;
+            padding: 10px 15px;
             border-radius: 12px;
             box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
             text-align: center;
@@ -32,6 +32,7 @@
         }
 
         #timeDisplay {
+            display: none;
             font-size: 36px;
             font-weight: 700;
             color: #0ff;
@@ -59,20 +60,24 @@
             padding: 8px;
             margin: 8px;
             border-radius: 6px;
-            width: 44px;
+            width: 48px;
             text-align: center;
             box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
         }
 
         .format-item span {
             display: block;
-            font-size: 24px;
+            font-size: 20px;
             /* margin-bottom: 5px; */
         }
 
         .format-item .label {
-            font-size: 12px;
+            font-size: 10px;
             color: #b2b2b2;
+        }
+        .year {
+            color: #ff3b30;
+            font-weight: bold;
         }
 
         #timeDisplayContainer:hover {

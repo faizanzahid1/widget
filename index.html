@@ -24,11 +24,11 @@
             background-color: rgba(15, 15, 15, 0.8);
             padding: 10px 15px;
             border-radius: 12px;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+            /*box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);*/
             text-align: center;
             min-width: 300px;
             border: 2px solid #0ff;
-            transition: transform 0.3s ease-in-out;
+            /*transition: transform 0.3s ease-in-out;*/
         }
 
         #timeDisplay {
@@ -62,13 +62,12 @@
             border-radius: 6px;
             width: 48px;
             text-align: center;
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
         }
 
         .format-item span {
             display: block;
             font-size: 20px;
-            /* margin-bottom: 5px; */
         }
 
         .format-item .label {
@@ -80,14 +79,6 @@
             font-weight: bold;
         }
 
-        #timeDisplayContainer:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.6);
-        }
-
-        #timeDisplayContainer, #timeDisplay {
-            transition: all 0.3s ease-in-out;
-        }
     </style>
 </head>
 <body>
@@ -100,6 +91,11 @@
     <script>
         const RED_COLOR = "#ff3b30";
         const OTHER_COLOR = "#0ff";
+
+        // Helper function to format numbers to two digits
+        function formatNumber(num) {
+            return String(num).padStart(2, '0');
+        }
 
         function calculateTimePassed(birthDate) {
             const currentDate = new Date();
@@ -136,13 +132,12 @@
             timeItems.forEach(item => {
                 const formatItem = document.createElement('div');
                 formatItem.classList.add('format-item');
-                formatItem.innerHTML = `
-                    <span class="${item.className}">${item.value}</span>
+                formatItem.innerHTML = `  
+                    <span class="${item.className}">${formatNumber(item.value)}</span>
                     <span class="label">${item.label}</span>
                 `;
                 formatsElement.appendChild(formatItem);
             });
-
         }
 
         setInterval(updateTime, 1000);

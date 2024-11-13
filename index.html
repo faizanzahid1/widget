@@ -24,11 +24,9 @@
             background-color: rgba(15, 15, 15, 0.8);
             padding: 10px 15px;
             border-radius: 12px;
-            /*box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);*/
             text-align: center;
-            min-width: 300px;
+            min-width: 350px;
             border: 2px solid rgb(24, 204, 238);
-            /*transition: transform 0.3s ease-in-out;*/
         }
 
         #timeDisplay {
@@ -51,34 +49,47 @@
         }
 
         .other {
-            color: #0ff;
+            color: rgb(24, 204, 238);
         }
 
         .format-item {
             display: inline-block;
-            background-color: rgba(15, 15, 15, 0.8);
             padding: 8px;
-            margin: 8px;
+            margin: 0 8px;
             border-radius: 6px;
-            width: 48px;
             text-align: center;
-            box-shadow: 0 0 30px rgba(24, 204, 238, 0.3);
+            width: 60px; /* Fixed width for each item */
+            box-sizing: border-box;
         }
 
         .format-item span {
-            display: block;
+            display: inline-block;
             font-size: 20px;
         }
 
         .format-item .label {
-            font-size: 10px;
+            font-size: 12px;
             color: #b2b2b2;
         }
+
         .year {
-            color: #ff3b30;
-            font-weight: bold;
+            color: #ff3b30; /* Red for Year */
         }
 
+        .month,
+        .day,
+        .hour,
+        .minute,
+        .second {
+            color: rgb(24, 204, 238); /* Same as border color */
+        }
+
+        .colon {
+            color: rgb(24, 204, 238); /* Same color as other items */
+            font-size: 22px;  /* Smaller colon */
+            font-weight: bold;  /* Bold colon */
+            margin: 0 -5px;  /* Reduced gap between colon and item */
+        }
     </style>
 </head>
 <body>
@@ -90,7 +101,7 @@
 
     <script>
         const RED_COLOR = "#ff3b30";
-        const OTHER_COLOR = "#0ff";
+        const OTHER_COLOR = "rgb(24, 204, 238)"; // Border color
 
         // Helper function to format numbers to two digits
         function formatNumber(num) {
@@ -121,22 +132,29 @@
             formatsElement.innerHTML = ''; // Clear previous formats
 
             const timeItems = [
-                { value: years, label: 'Year', className: 'year' },
-                { value: months, label: 'Month', className: 'other' },
-                { value: days, label: 'Day', className: 'other' },
-                { value: hours, label: 'Hour', className: 'other' },
-                { value: minutes, label: 'Minute', className: 'other' },
-                { value: seconds, label: 'Second', className: 'other' },
+                { value: years, className: 'year' },
+                { value: months, className: 'month' },
+                { value: days, className: 'day' },
+                { value: hours, className: 'hour' },
+                { value: minutes, className: 'minute' },
+                { value: seconds, className: 'second' },
             ];
 
-            timeItems.forEach(item => {
+            timeItems.forEach((item, index) => {
                 const formatItem = document.createElement('div');
                 formatItem.classList.add('format-item');
                 formatItem.innerHTML = `  
                     <span class="${item.className}">${formatNumber(item.value)}</span>
-                    <span class="label">${item.label}</span>
                 `;
                 formatsElement.appendChild(formatItem);
+
+                // Add colon between items, except for the last one
+                if (index < timeItems.length - 1) {
+                    const colon = document.createElement('span');
+                    colon.classList.add('colon');
+                    colon.innerText = ':';
+                    formatsElement.appendChild(colon);
+                }
             });
         }
 

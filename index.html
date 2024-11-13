@@ -27,6 +27,8 @@
             text-align: center;
             min-width: 350px;
             border: 2px solid rgb(24, 204, 238);
+            width: 100%; /* Ensure it adjusts to screen size */
+            max-width: 480px; /* Limit the max width on larger screens */
         }
 
         #timeDisplay {
@@ -90,6 +92,60 @@
             font-weight: bold;  /* Bold colon */
             margin: 0 -5px;  /* Reduced gap between colon and item */
         }
+
+        /* Mobile responsiveness */
+        @media (max-width: 600px) {
+            body {
+                font-size: 14px; /* Slightly smaller font for mobile */
+            }
+
+            #timeDisplay {
+                font-size: 28px; /* Reduce size of time display */
+                margin-bottom: 10px;
+            }
+
+            .format-item span {
+                font-size: 18px; /* Smaller number font size for mobile */
+            }
+
+            .colon {
+                font-size: 18px;  /* Smaller colon */
+                margin: 0 -4px;  /* Reduce gap further */
+            }
+
+            .format-item {
+                width: 50px; /* Smaller width for each item */
+                margin: 0 4px; /* Reduced margin for mobile */
+            }
+
+            #timeDisplayContainer {
+                padding: 8px 12px; /* Smaller padding for smaller screens */
+            }
+        }
+
+        @media (max-width: 400px) {
+            #timeDisplayContainer {
+                padding: 6px 10px; /* Even smaller padding for very small screens */
+            }
+
+            .format-item {
+                width: 45px; /* Even smaller item width */
+            }
+
+            .format-item span {
+                font-size: 16px; /* Further reduced font size */
+            }
+
+            .colon {
+                font-size: 16px; /* Smaller colon for very small screens */
+            }
+
+            #timeDisplay {
+                font-size: 24px; /* Even smaller font for time display */
+                margin-bottom: 8px;
+            }
+        }
+
     </style>
 </head>
 <body>

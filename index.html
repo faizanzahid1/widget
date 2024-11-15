@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Age Timer</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-color: #191919;
+            --container-bg-color: #333;
+            --highlight-color: #ff9800;
+            --default-color: #999;
+            --colon-color: #888;
+            --pulse-color: #00bcd4;
+        }
+
         body {
             font-family: 'Orbitron', sans-serif;
             display: flex;
@@ -13,209 +23,138 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background: #191919;
-            color: #e0e0e0;
+            background: var(--bg-color);
+            color: var(--highlight-color);
             font-size: 16px;
-            line-height: 1.3;
+            line-height: 1.4;
             flex-direction: column;
         }
 
         #timeDisplayContainer {
-            background-color: rgba(15, 15, 15, 0.8);
+            background-color: var(--container-bg-color);
             padding: 10px 15px;
-            border-radius: 12px;
+            border-radius: 8px;
             text-align: center;
-            min-width: 350px;
-            border: 2px solid rgb(24, 204, 238);
-            width: 100%; /* Ensure it adjusts to screen size */
-            max-width: 480px; /* Limit the max width on larger screens */
+            border: 3px solid #555;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         }
 
         #timeDisplay {
-            display: none;
-            font-size: 36px;
-            font-weight: 700;
-            color: #0ff;
-            margin-bottom: 15px;
+            font-size: 20px;
+            font-weight: 500;
+            text-transform: uppercase;
             letter-spacing: 2px;
-            text-transform: uppercase;
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.6), 0 0 20px rgba(0, 255, 255, 0.3);
-        }
-
-        .unit {
-            font-size: 16px;
-            font-weight: normal;
-            color: #b2b2b2;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .other {
-            color: rgb(24, 204, 238);
+            text-shadow: 0 0 15px rgba(0, 188, 212, 0.5);
         }
 
         .format-item {
             display: inline-block;
-            padding: 8px;
-            margin: 0 8px;
-            border-radius: 6px;
+            margin: 0 4px;
             text-align: center;
-            width: 60px; /* Fixed width for each item */
-            box-sizing: border-box;
+            width: 40px;
+            color: var(--default-color);
         }
 
-        .format-item span {
-            display: inline-block;
-            font-size: 20px;
-        }
-
-        .format-item .label {
-            font-size: 12px;
-            color: #b2b2b2;
-        }
-
-        .year {
-            color: #ff3b30; /* Red for Year */
-        }
-
-        .month,
-        .day,
-        .hour,
-        .minute,
-        .second {
-            color: rgb(24, 204, 238); /* Same as border color */
+        .highlight {
+            color: var(--highlight-color);
         }
 
         .colon {
-            color: rgb(24, 204, 238); /* Same color as other items */
-            font-size: 22px;  /* Smaller colon */
-            font-weight: bold;  /* Bold colon */
-            margin: 0 -5px;  /* Reduced gap between colon and item */
+            color: var(--colon-color);
+            font-weight: bold;
+            margin: 0 -4px;
+            animation: pulse 3s infinite ease-in-out;
         }
 
-        /* Mobile responsiveness */
-        @media (max-width: 600px) {
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                color: var(--colon-color);
+            }
+            50% {
+                transform: scale(2);
+                color: var(--pulse-color);
+            }
+            100% {
+                transform: scale(1);
+                color: var(--colon-color);
+            }
+        }
+
+        @media (max-width: 768px) {
             body {
-                font-size: 14px; /* Slightly smaller font for mobile */
-            }
-
-            #timeDisplay {
-                font-size: 28px; /* Reduce size of time display */
-                margin-bottom: 10px;
-            }
-
-            .format-item span {
-                font-size: 18px; /* Smaller number font size for mobile */
-            }
-
-            .colon {
-                font-size: 18px;  /* Smaller colon */
-                margin: 0 -4px;  /* Reduce gap further */
-            }
-
-            .format-item {
-                width: 50px; /* Smaller width for each item */
-                margin: 0 4px; /* Reduced margin for mobile */
+                font-size: 14px;
             }
 
             #timeDisplayContainer {
-                padding: 8px 12px; /* Smaller padding for smaller screens */
-            }
-        }
-
-        @media (max-width: 400px) {
-            #timeDisplayContainer {
-                padding: 6px 10px; /* Even smaller padding for very small screens */
-            }
-
-            .format-item {
-                width: 45px; /* Even smaller item width */
-            }
-
-            .format-item span {
-                font-size: 16px; /* Further reduced font size */
-            }
-
-            .colon {
-                font-size: 16px; /* Smaller colon for very small screens */
+                padding: 8px 12px;
             }
 
             #timeDisplay {
-                font-size: 24px; /* Even smaller font for time display */
-                margin-bottom: 8px;
+                font-size: 18px;
             }
         }
 
+        @media (max-width: 480px) {
+            body {
+                font-size: 12px;
+            }
+
+            #timeDisplayContainer {
+                padding: 6px 10px;
+            }
+
+            #timeDisplay {
+                font-size: 16px;
+            }
+        }
     </style>
 </head>
+
 <body>
 
     <div id="timeDisplayContainer">
-        <div id="timeDisplay">Loading...</div>
-        <div id="formats"></div>
+        <div id="timeDisplay"></div>
     </div>
 
     <script>
-        const RED_COLOR = "#ff3b30";
-        const OTHER_COLOR = "rgb(24, 204, 238)"; // Border color
-
-        // Helper function to format numbers to two digits
         function formatNumber(num) {
             return String(num).padStart(2, '0');
         }
 
         function calculateTimePassed(birthDate) {
-            const currentDate = new Date();
-            const birthDateObj = new Date(birthDate);
-            const timeDiff = currentDate - birthDateObj;
-            const years = Math.floor(timeDiff / (1000 * 60 * 60 * 24 * 365.25));
-            const months = Math.floor(timeDiff / (1000 * 60 * 60 * 24 * 30.436875)) % 12;
-            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24)) % 30;
-            const hours = Math.floor(timeDiff / (1000 * 60 * 60)) % 24;
-            const minutes = Math.floor(timeDiff / (1000 * 60)) % 60;
-            const seconds = Math.floor(timeDiff / 1000) % 60;
-            return { years, months, days, hours, minutes, seconds };
+            const diff = new Date() - new Date(birthDate);
+            return {
+                years: Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25)),
+                months: Math.floor(diff / (1000 * 60 * 60 * 24 * 30.436875)) % 12,
+                days: Math.floor(diff / (1000 * 60 * 60 * 24)) % 30,
+                hours: Math.floor(diff / (1000 * 60 * 60)) % 24,
+                minutes: Math.floor(diff / (1000 * 60)) % 60,
+                seconds: Math.floor(diff / 1000) % 60
+            };
         }
 
         function updateTime() {
-            const birthDate = "1999-03-08";
-            const { years, months, days, hours, minutes, seconds } = calculateTimePassed(birthDate);
-
-            const timeDisplayElement = document.getElementById("timeDisplay");
-            const formatsElement = document.getElementById("formats");
-
-            timeDisplayElement.innerHTML = ''; // Clear previous content
-            formatsElement.innerHTML = ''; // Clear previous formats
-
-            const timeItems = [
-                { value: years, className: 'year' },
-                { value: months, className: 'month' },
-                { value: days, className: 'day' },
-                { value: hours, className: 'hour' },
-                { value: minutes, className: 'minute' },
-                { value: seconds, className: 'second' },
-            ];
-
-            timeItems.forEach((item, index) => {
-                const formatItem = document.createElement('div');
-                formatItem.classList.add('format-item');
-                formatItem.innerHTML = `  
-                    <span class="${item.className}">${formatNumber(item.value)}</span>
-                `;
-                formatsElement.appendChild(formatItem);
-
-                // Add colon between items, except for the last one
-                if (index < timeItems.length - 1) {
-                    const colon = document.createElement('span');
-                    colon.classList.add('colon');
-                    colon.innerText = ':';
-                    formatsElement.appendChild(colon);
-                }
-            });
+            const { years, months, days, hours, minutes, seconds } = calculateTimePassed("1999-03-08");
+            const timeDisplay = document.getElementById("timeDisplay");
+            timeDisplay.innerHTML = `
+                <span class="format-item highlight">${formatNumber(years)}</span>
+                <span class="colon">:</span>
+                <span class="format-item">${formatNumber(months)}</span>
+                <span class="colon">:</span>
+                <span class="format-item">${formatNumber(days)}</span>
+                <span class="colon">:</span>
+                <span class="format-item">${formatNumber(hours)}</span>
+                <span class="colon">:</span>
+                <span class="format-item">${formatNumber(minutes)}</span>
+                <span class="colon">:</span>
+                <span class="format-item">${formatNumber(seconds)}</span>
+            `;
         }
 
         setInterval(updateTime, 1000);
     </script>
 
 </body>
+
 </html>

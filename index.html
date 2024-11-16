@@ -30,23 +30,25 @@
 
         .format-item {
             display: inline-block;
-            margin: 0 4px;
+            width: 50px; /* Only width here */
             text-align: center;
-            width: 50px;
-            font-size: 20px;
-            font-weight: Semibold;
-            color: #98FF1A;
-            box-shadow: 0 0 10px #98FF1A;
         }
 
-        .year {
+        .number {
+            font-size: 20px;
+            font-weight: bold;
+            color: #98FF1A;
+            /*box-shadow: 0 0 10px #98FF1A;*/
+        }
+
+        .year .number {
             color: #FF3030;
             text-shadow: 0 0 10px #FF3030;
         }
 
         .colon {
             color: #00E5FF;
-            box-shadow: 0 0 4px #00E5FF;
+            /*box-shadow: 0 0 4px #00E5FF;*/
             margin: 0 -8px;
             font-size: 18px;
         }
@@ -54,6 +56,9 @@
         @media (max-width: 768px) {
             .format-item {
                 width: 40px;
+            }
+
+            .number {
                 font-size: 16px;
             }
         }
@@ -87,17 +92,17 @@
             const { years, months, days, hours, minutes, seconds } = calculateTimePassed("1999-03-08");
             const timeDisplay = document.getElementById("timeDisplay");
             timeDisplay.innerHTML = `
-                <span class="format-item year">${formatNumber(years)}</span>
+                <span class="format-item year"><span class="number">${formatNumber(years)}</span></span>
                 <span class="colon">:</span>
-                <span class="format-item">${formatNumber(months)}</span>
+                <span class="format-item"><span class="number">${formatNumber(months)}</span></span>
                 <span class="colon">:</span>
-                <span class="format-item">${formatNumber(days)}</span>
+                <span class="format-item"><span class="number">${formatNumber(days)}</span></span>
                 <span class="colon">:</span>
-                <span class="format-item">${formatNumber(hours)}</span>
+                <span class="format-item"><span class="number">${formatNumber(hours)}</span></span>
                 <span class="colon">:</span>
-                <span class="format-item">${formatNumber(minutes)}</span>
+                <span class="format-item"><span class="number">${formatNumber(minutes)}</span></span>
                 <span class="colon">:</span>
-                <span class="format-item">${formatNumber(seconds)}</span>
+                <span class="format-item"><span class="number">${formatNumber(seconds)}</span></span>
             `;
         }
 

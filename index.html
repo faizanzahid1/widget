@@ -4,107 +4,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Age Timer</title>
+    <title>Neon Age Timer</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg-color: #191919;
-            --container-bg-color: #333;
-            --highlight-color: #ff9800;
-            --default-color: #999;
-            --colon-color: #888;
-            --pulse-color: #00bcd4;
-        }
-
         body {
             font-family: 'Orbitron', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
-            background: var(--bg-color);
-            color: var(--highlight-color);
-            font-size: 16px;
-            line-height: 1.4;
+            margin: 0; /* Ensure no extra space above */
+            background: #191919;
+            color: #ffffff;
             flex-direction: column;
         }
 
         #timeDisplayContainer {
-            background-color: var(--container-bg-color);
-            padding: 10px 15px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px;
             border-radius: 8px;
             text-align: center;
-            border: 3px solid #555;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-        }
-
-        #timeDisplay {
-            font-size: 20px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 0 15px rgba(0, 188, 212, 0.5);
+            border: 2px solid #FF6F61;
+            box-shadow: 0 0 20px rgba(255, 111, 97, 0.8);
         }
 
         .format-item {
             display: inline-block;
             margin: 0 4px;
             text-align: center;
-            width: 40px;
-            color: var(--default-color);
+            width: 50px;
+            font-size: 20px;
+            font-weight: Semibold;
+            color: #00FFFF;
         }
 
-        .highlight {
-            color: var(--highlight-color);
+        .year {
+            color: #FF6F61;
+            text-shadow: 0 0 15px rgba(255, 111, 97, 1);
         }
 
         .colon {
-            color: var(--colon-color);
-            font-weight: bold;
-            margin: 0 -4px;
-            animation: pulse 3s infinite ease-in-out;
-        }
-
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-                color: var(--colon-color);
-            }
-            50% {
-                transform: scale(2);
-                color: var(--pulse-color);
-            }
-            100% {
-                transform: scale(1);
-                color: var(--colon-color);
-            }
+            margin: 0 -8px;
+            color: #FFFF00;
+            font-size: 18px;
         }
 
         @media (max-width: 768px) {
-            body {
-                font-size: 14px;
-            }
-
-            #timeDisplayContainer {
-                padding: 8px 12px;
-            }
-
-            #timeDisplay {
-                font-size: 18px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            body {
-                font-size: 12px;
-            }
-
-            #timeDisplayContainer {
-                padding: 6px 10px;
-            }
-
-            #timeDisplay {
+            .format-item {
+                width: 40px;
                 font-size: 16px;
             }
         }
@@ -138,7 +85,7 @@
             const { years, months, days, hours, minutes, seconds } = calculateTimePassed("1999-03-08");
             const timeDisplay = document.getElementById("timeDisplay");
             timeDisplay.innerHTML = `
-                <span class="format-item highlight">${formatNumber(years)}</span>
+                <span class="format-item year">${formatNumber(years)}</span>
                 <span class="colon">:</span>
                 <span class="format-item">${formatNumber(months)}</span>
                 <span class="colon">:</span>
